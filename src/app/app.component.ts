@@ -16,9 +16,11 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /*Fonction qui permet de prendre la référence et de la transmettre à tous les composants*/
   selectDuBateau(variable:any){
     this.varRef=variable;
 		}
+  /*Fonction qui permet de prendre la longueur du bateau et de la transmettre à tous les composants*/
   infosBateau(variable:any){
       this.varLenght=variable;
     }

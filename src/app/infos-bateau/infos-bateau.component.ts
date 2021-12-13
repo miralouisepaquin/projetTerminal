@@ -8,23 +8,26 @@ import { HttpClient } from '@angular/common/http';
 })
 export class InfosBateauComponent implements OnInit {
 
-  affichageDeBeateau="https://iwa2021.edriki.com/api/Boat/ByRef/";
-  public GVSL : any;
-  public GVL : any;
-  public GVE : any;
-  public GM : any;
-  public GE : any;
-  public SS : any;
-  public SA : any;
-  public GS : any;
+  affichageDeBeateau="https://iwa2021.edriki.com/api/Boat/ByRef/"; /*API pour la recherche d'informations sur le bateau grâce à la Référence*/
+  public GVSL : any; /*variable pour longueur GVSL*/
+  public GVL : any; /*variable pour longueur GVL*/
+  public GVE : any; /*variable pour longueur GVE*/
+  public GM : any; /*variable pour longueur GM*/
+  public GE : any; /*variable pour longueur GE*/
+  public SS : any; /*variable pour longueur SS*/
+  public SA : any; /*variable pour longueur SA*/
+  public GS : any; /*variable pour longueur GS*/
   constructor(private http : HttpClient) { }
 
+  /*Valeur d'entrée pour la référence provenant de la recherche de bateau*/
   @Input() varRef:string="";
+  /*Valeur de sortie pour la longueur du bateau allant dans recherche baetau*/
   @Output() varLenght = new EventEmitter<String>();
 
   ngOnInit(): void {
   }
 
+  /*Fonction appelant l'API de la recherche d'infos du bateau et qui renvoit les différentes longueurs de voile*/
   ngOnChanges() : Input {
     var ref= this.varRef;
     this.http.get<any>(this.affichageDeBeateau+ref).subscribe(response =>{	
@@ -39,6 +42,11 @@ export class InfosBateauComponent implements OnInit {
       this.varLenght.emit(response.response.datas.lengthm);
       })
       return this.GVL && this.GVE && this.GM && this.GE && this.SS && this.SA && this.GS;
+  }
+
+  envoyerInfosBateau()
+  {
+    
   }
 
 }
