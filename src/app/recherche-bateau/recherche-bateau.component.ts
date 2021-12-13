@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -8,19 +8,25 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RechercheBateauComponent implements OnInit {
 
+  @Input() varLenght:string="";
   @Output() varRef = new EventEmitter<String>();
 
   private minString = 3;
   private maxString = 40;
   public listeBateau : any
   showMe: boolean = false;
-  public lenghtBateau = null;
+  public lenghtBateau = "";
   rechercheDeBeateau="https://iwa2021.edriki.com/api/Boat/Search/";
   affichageDeBeateau="https://iwa2021.edriki.com/api/Boat/ByRef/";
   
   constructor(private http : HttpClient) { }
 
   ngOnInit(): void { }
+
+  ngOnChanges() : String {
+    var ref= this.varLenght;
+    return this.lenghtBateau = ref;
+  }
 
   getData(event :any){
     var term=event.target.value;
@@ -39,11 +45,7 @@ export class RechercheBateauComponent implements OnInit {
 	selectionDuBateau(event :any){
 		var ref=event.target.value;
     console.log(ref);
-      this.http.get<any>(this.affichageDeBeateau+ref).subscribe(response =>{		
-        this.lenghtBateau = response.response.datas.lengthm;
-        this.varRef.emit(ref);
-        return this.lenghtBateau;
-			})
+    return this.varRef.emit(ref);
 	}  
 
 }

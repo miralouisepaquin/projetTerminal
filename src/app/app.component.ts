@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   constructor() { }
 
   public varRef = "";
+  public varLenght = "";
 
   ngOnInit(): void {
   }
@@ -18,4 +19,7 @@ export class AppComponent implements OnInit {
   selectDuBateau(variable:any){
     this.varRef=variable;
 		}
+  infosBateau(variable:any){
+      this.varLenght=variable;
+    }
 }

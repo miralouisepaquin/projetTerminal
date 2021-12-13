@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -20,6 +20,7 @@ export class InfosBateauComponent implements OnInit {
   constructor(private http : HttpClient) { }
 
   @Input() varRef:string="";
+  @Output() varLenght = new EventEmitter<String>();
 
   ngOnInit(): void {
   }
@@ -35,6 +36,7 @@ export class InfosBateauComponent implements OnInit {
       this.SS = response.response.datas.sails.ss;
       this.SA = response.response.datas.sails.sa;
       this.GS = response.response.datas.sails.gs;
+      this.varLenght.emit(response.response.datas.lengthm);
       })
       return this.GVL && this.GVE && this.GM && this.GE && this.SS && this.SA && this.GS;
   }
