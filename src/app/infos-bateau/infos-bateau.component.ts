@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-infos-bateau',
@@ -17,12 +17,20 @@ export class InfosBateauComponent implements OnInit {
   public SS : any; /*variable pour longueur SS*/
   public SA : any; /*variable pour longueur SA*/
   public GS : any; /*variable pour longueur GS*/
+
+  public parametres = new HttpParams();
+  public infobateau = new Set<String>();
+
+  
   constructor(private http : HttpClient) { }
 
   /*Valeur d'entrée pour la référence provenant de la recherche de bateau*/
   @Input() varRef:string="";
-  /*Valeur de sortie pour la longueur du bateau allant dans recherche baetau*/
+  /*Valeur de sortie pour la longueur du bateau allant dans recherche bateau*/
   @Output() varLenght = new EventEmitter<String>();
+  /*Valeur de sortie pour les infos du bateau allant dans recherche bateau*/
+  @Output() varInfoBateau = new EventEmitter<any>();
+
 
   ngOnInit(): void {
   }
@@ -38,8 +46,10 @@ export class InfosBateauComponent implements OnInit {
       this.GE = response.response.datas.sails.ge;
       this.SS = response.response.datas.sails.ss;
       this.SA = response.response.datas.sails.sa;
-      this.GS = response.response.datas.sails.gs;
+      this.GS = response.response.datas.sails.gs;  
+      this.infobateau.add(this.GVL).add(this.GVSL).add(this.GVE).add(this.GM).add(this.GE).add(this.SS).add(this.SA).add(this.GS);   
       this.varLenght.emit(response.response.datas.lengthm);
+      this.varInfoBateau.emit(this.infobateau);
       })
       return this.GVL && this.GVE && this.GM && this.GE && this.SS && this.SA && this.GS;
   }

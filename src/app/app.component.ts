@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
 
   public varRef = "";
   public varLenght = "";
+  public varInfoBateau = "";
 
   ngOnInit(): void {
   }
@@ -21,7 +22,11 @@ export class AppComponent implements OnInit {
     this.varRef=variable;
 		}
   /*Fonction qui permet de prendre la longueur du bateau et de la transmettre à tous les composants*/
-  infosBateau(variable:any){
+  infosLenght(variable:any){
       this.varLenght=variable;
     }
+  /*Fonction qui permet de prendre les infos du bateau et de la transmettre à tous les composants*/
+  infosBateau(variable:any){
+    this.varInfoBateau=variable;
+  }
 }
