@@ -10,6 +10,8 @@ export class RechercheBateauComponent implements OnInit {
 
   /*Valeur d'entrée de longueur provenant du composant infos-bateau*/
   @Input() varLenght:string="";
+  /*Valeur d'entrée pour les informations du bateau provenant de la de la section info-bateau*/
+  @Input() varInfoBateau:string="";
   /*Valeur de sortie de Référence qui va dans le composant infos-bateau*/
   @Output() varRef = new EventEmitter<String>();
 
@@ -32,6 +34,7 @@ export class RechercheBateauComponent implements OnInit {
   getData(event :any){
     var term=event.target.value;
     if(term.length >= this.minString && term.length <this.maxString){
+      this.varInfoBateau="";
       this.http.get<any>(this.rechercheDeBeateau+term).subscribe(response =>{
 			  var liste = new Array;	  
 			  response.response.datas.forEach(function (value:any){
