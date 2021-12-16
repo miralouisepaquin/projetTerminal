@@ -34,7 +34,6 @@ export class RechercheBateauComponent implements OnInit {
   getData(event :any){
     var term=event.target.value;
     if(term.length >= this.minString && term.length <this.maxString){
-      this.varInfoBateau="";
       this.http.get<any>(this.rechercheDeBeateau+term).subscribe(response =>{
 			  var liste = new Array;	  
 			  response.response.datas.forEach(function (value:any){

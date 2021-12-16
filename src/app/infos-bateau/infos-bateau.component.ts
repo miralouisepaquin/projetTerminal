@@ -16,10 +16,11 @@ export class InfosBateauComponent implements OnInit {
   public GE : any; /*variable pour longueur GE*/
   public SS : any; /*variable pour longueur SS*/
   public SA : any; /*variable pour longueur SA*/
-  public GS : any; /*variable pour longueur GS*/
+  public GS : any; /*variable pour longueur GS*/ 
 
   public parametres = new HttpParams();
-  public infobateau = new Set<String>();
+  public infobateau = new Array;
+  
 
   
   constructor(private http : HttpClient) { }
@@ -38,6 +39,7 @@ export class InfosBateauComponent implements OnInit {
   /*Fonction appelant l'API de la recherche d'infos du bateau et qui renvoit les différentes longueurs de voile*/
   ngOnChanges() : Input {
     var ref= this.varRef;
+
     this.http.get<any>(this.affichageDeBeateau+ref).subscribe(response =>{	
       this.GVSL = response.response.datas.sails.gvsl;
       this.GVL = response.response.datas.sails.gvl;
@@ -47,7 +49,8 @@ export class InfosBateauComponent implements OnInit {
       this.SS = response.response.datas.sails.ss;
       this.SA = response.response.datas.sails.sa;
       this.GS = response.response.datas.sails.gs;  
-      this.infobateau.add(this.GVL).add(this.GVSL).add(this.GVE).add(this.GM).add(this.GE).add(this.SS).add(this.SA).add(this.GS);   
+      this.infobateau=[];
+      this.infobateau=[this.GVL, this.GVSL, this.GVE, this.GM, this.GE, this.SS, this.SA, this.GS];   
       this.varLenght.emit(response.response.datas.lengthm);
       this.varInfoBateau.emit(this.infobateau);
       })

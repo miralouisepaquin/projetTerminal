@@ -11,8 +11,10 @@ export class PrixBateauComponent implements OnInit {
   /*Valeur d'entrée pour la longueur du bateau provenant de la section info-bateau*/
   @Input() varLenght:string="";
   /*Valeur d'entrée pour les informations du bateau provenant de la de la section info-bateau*/
-  @Input() varInfoBateau:string="";
-  affichageDePrix="GET https://iwa2021.edriki.com/api/Item/Items?"; /*API pour la recherche d'informations sur le bateau grâce à la Référence*/
+  @Input() varInfoBateau = new Array;
+
+  affichageDePrix="https://iwa2021.edriki.com/api/Item/Items?"; /*API pour la recherche d'informations sur le bateau grâce à la Référence*/
+  public prixBateau="";
 
   constructor(private http : HttpClient) { }
 
@@ -22,11 +24,12 @@ export class PrixBateauComponent implements OnInit {
   ngOnChanges() : any {
     console.log(this.varLenght);
     console.log(this.varInfoBateau);
-
-    /*this.http.get<any>(this.affichageDePrix+"length="+this.varLenght+"gvl="+this.varInfoBateau[0]+"&gvsl="+this.varInfoBateau[1]+"&ge="+this.varInfoBateau[2]+"&ss="+this.varInfoBateau[3]+"&gs="+this.varInfoBateau[4]).subscribe(response =>{	
+    var infoPrix = "";
+    this.http.get<any>(this.affichageDePrix+"length="+this.varLenght+"gvl="+this.varInfoBateau[0]+"&gvsl="+this.varInfoBateau[1]+"&ge="+this.varInfoBateau[2]+"&ss="+this.varInfoBateau[3]+"&gs="+this.varInfoBateau[4]).subscribe(response =>{	
       console.log(response.response.datas);
+      infoPrix = response.response.datas;
       })
-      return ;*/
+      return this.prixBateau= infoPrix;
 
   }
      

@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
 
   public varRef = "";
   public varLenght = "";
-  public varInfoBateau = "";
+  public varInfoBateau = new Array;
 
   ngOnInit(): void {
   }
